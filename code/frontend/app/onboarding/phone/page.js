@@ -20,13 +20,16 @@ export default function PhoneNumberPage() {
     setSuccess("");
 
     try {
-      const response = await fetch("/api/SendOTP", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ phoneNumber }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/SendOTP`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ phoneNumber }),
+        }
+      );
 
       const data = await response.json();
 
@@ -48,16 +51,19 @@ export default function PhoneNumberPage() {
     setSuccess("");
 
     try {
-      const response = await fetch("/api/VerifyOTP", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId,
-          secret: otp,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/VerifyOTP`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId,
+            secret: otp,
+          }),
+        }
+      );
 
       const data = await response.json();
 
